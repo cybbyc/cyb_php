@@ -16,12 +16,15 @@ abstract class Person{
 //    属性
     protected $name;
     protected $country;
+    public $runtype;
+    const CON = "CON VALUE";
 
 //    构造方法 ，如果权限为public，则子类会自动调用，如果权限为protected，必须在子类的构造方法中继承父类的构造方法
     protected function __construct($name="",$country="china")
     {
         $this->name = $name;
         $this->country=$country;
+        $this->runtype = $this->run();
     }
 
 //抽象方法   c
@@ -29,8 +32,8 @@ abstract class Person{
     abstract function eat();
 
 //    非抽象方法
-    function run(){
-        echo "使用两条腿走路<br>";
+    private function run(){
+        return "使用两条腿走路<br>";
     }
 
 }
@@ -72,26 +75,30 @@ class Americans extends Person{
     }
 }
 
-class GuangDong extends ChineseMan{
+//在普通类中定义抽象方法，则该类必须使用abstract修饰为抽象类
+abstract class GuangDong{
+    function a(){
+
+    }
+    abstract function ab();
 
 }
 
 //不能实例化抽象类
 //$person = new Person();
+echo Person::CON."<br>";
 
 //实例化子类对象
 $chineseMan = new ChineseMan("cyb","中国");
 $chineseMan->eat();
 $chineseMan->say();
-$chineseMan->run();
+echo $chineseMan->runtype;
 
 $Americans = new Americans("jone","美国");
 $Americans->eat();
 $Americans->say();
-$Americans->run();
+echo $Americans->runtype;
 
-$guangDong = new GuangDong("hehe","广东");
-$guangDong->eat();
 
 
 
