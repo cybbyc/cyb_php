@@ -1,0 +1,51 @@
+模块开发：把新模块写在phpcms/modules/ 目录下
+
+url路径访问：http://localhost/phpcms20170206/index.php?m=模块名&c=控制器名&a=方法名
+
+所有pc_base::开头的都是phpcms/base.php中声明的方法(静态方法)
+	
+	//加载配置文件
+	pc_base::load_config		项目根/caches/configs/
+	
+	//加载系统类，是系统中的全局类   /phpcms/libs/classes/
+	pc_base::load_sys_class("类名")		
+	
+	//加载应用类 模块名/classes/		本模块中第二个参数可省略
+	pc_base::load_app_class("类名","模块名")
+	
+	//加载数据模型	/phpcms/model/
+	pc_base::load_model("类名")
+	
+	//加载系统函数库,是系统中的全局函数   /phpcms/libs/functions/
+	pc_base::load_sys_func("函数名")
+
+	//加载应用函数库	模块名/functions/		本模块中第二个参数可省略
+	pc_base::load_app_func("函数名","模块名")	
+	
+	
+	
+phpcms前后台模块的模板是不同的
+
+
+前台：/phpcms/templates/模板风格/文件夹/***.html文件
+	加载模板：include template("文件夹名","***(文件名)");
+	注意：第一个参数并非模块名
+
+后台：/phpcms/modules/模块名/template/***.tpl.php文件
+	加载模板：include $this->admin_tpl("***(文件名)","模块名")
+	
+	
+前台模板可以使用pc标签，但后台模板不能使用pc标签，只能使用PHP代码+前端代码
+
+语言包 /phpcms/languages/***(模块名).lang.php
+
+
+
+
+
+
+
+
+
+
+
