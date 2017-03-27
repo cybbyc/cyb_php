@@ -38,9 +38,25 @@
 			3)分页控件显示 $this->db->pages;
 			
 			
-	9.管理页面--添加页面
-		js插件：artdialog--js弹窗
+	9.管理页面--添加页面(使用弹窗)
+		js插件：artdialog
+		跳转大按钮：$big_menu  ---ja插件 artdialog编写 
 		
+		
+	10.上传头像的类：form::images   
+		form类是一个编辑器类(系统类)	注意：需要加载
+		
+	11.表单输入验证：
+		formValidator---jquery插件
+		
+	12.处理提交添加
+		SYS_TIME:phpcms的系统时间常量
+		$this->db->insert()：插入数据方法
+		判断插入返回值，成功或失败跳转页面使用：showmessage()全局函数
+		
+	12.修改页面(使用弹窗)
+	
+	13.删除
 		
 		
 		
