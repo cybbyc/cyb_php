@@ -1,0 +1,126 @@
+扩展的一些技巧：
+
+扩展原有的模块
+
+	1.不应该在模块类中添加新的方法---升级会被覆盖
+	
+	2.新建一个控制器，然后继承原来的模块，ps:使用其他命名继承行不行？
+		新控制器命名：My_***，如my_link表示可以继承link控制器
+		
+		继承原来的控制器类后可以获得原来数据库表中的数据
+		
+	3.新控制器类中连接新的表，如link类中连接news表
+		添加构造方法，如：
+		//重写构造方法
+		function __construct(){
+		//子类构造方法会覆盖父类构造方法，要继续使用父类构造方法，需要继承父类的构造方法
+			parent::__construct();
+			
+			$this->db1 = pc_base::load_model("mytest_model");
+		}
+	
+	4.如果想重写父类中的方法，会直接覆盖父类方法，如果想扩展父类方法，则在方法中继承父类方法：
+		parent::父类方法名;
+	如果不想让父类方法在子类中被重写，则在父类方法名前添加final修饰
+	
+	
+	
+
+phpcms代码阅读
+
+	提取phpcms的框架：根目录/phpsso_server/目录就是一个编写PHPcms的框架
+	可以使用该框架写自己的项目，而且不会涉及到版权问题
+	
+	phpcms 框架的使用：
+		1.拷贝/phpsso_server/的所有内容到一个新的项目目录
+	
+		2.配置：
+			caches/configs/route.php 中的路由要修改
+			caches/configs/system.php 中修改网站路径
+				其中有关路径的变量需要修改
+				如果不改，会造成验证码出错，界面排版混乱
+				
+		3.数据库
+			caches/configs/database.php 中修改数据库连接；如果不修改，会提示数据库表不存在等
+			
+			新建数据库，从phpcms把基本的数据库表拷贝到新数据库中：
+			sso_前缀的数据库表，其中一定要把sso_admin和sso_session表拷贝到新数据库中
+			有了这两个表才能登陆到后台管理页面，不然无法登陆
+			
+			删除model类，数据控制类，保留admin_model.class.php和session_model.class.php
+			
+			删除phpcms/models/所有应用，保留admin这个模块
+			
+			登陆到后台，右侧主题页面有错误
+				找到admin/index.php 中
+				function right(){
+					//删除
+				}
+				
+				
+		4.把原phpcms项目中的模块拷贝到使用phpcms框架中：
+			1.拷贝原模块到新项目中
+			2.拷贝原模块对应的数据库表，改相应的表前缀(caches/configs/database.php )
+			3.把相应的model类拷贝到新项目
+			
+		5.添加前端模板：比较麻烦
+			可以使用Smarty模板引擎
+			
+			
+			
+类库的使用，系统类库都是相互独立的，可以单独加载使用
+
+
+移植站点：
+			
+	
+	给本机区域名(不使用localhost)：
+
+	c:/windows/system32/dirvers/etc/hosts
+	
+	127.0.0.1    localhost
+	改为
+	127.0.0.1    www.cybbyc110.com
+	
+	
+	根据phpcms手册
+		1.把system.php配置文件中的所有有关路径的度需要改掉
+		2.到后台站点管理修改站点域名
+		3.到后台更新缓存
+		4.更新管理栏目缓存、内容缓存
+		5.进入内容-》附件管理-》附件地址替换，把附件地址批量替换
+		6.内容-》批量更新url
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
